@@ -304,3 +304,266 @@ export const recentActivity: Activity[] = [
   },
 ];
 
+// Workflow & Approval States
+export type WorkflowStatus = "draft" | "submitted" | "under_review" | "approved" | "rejected" | "returned";
+export type WorkflowRole = "programme_manager" | "reviewer" | "treasury_manager";
+
+export interface WorkflowItem {
+  id: number;
+  projectId: number;
+  projectName: string;
+  department: string;
+  quarter: string;
+  status: WorkflowStatus;
+  submittedBy: string;
+  submittedDate: string;
+  reviewedBy?: string;
+  reviewedDate?: string;
+  approvedBy?: string;
+  approvedDate?: string;
+  comments?: string;
+  deviationExplanation?: string;
+}
+
+export const workflowItems: WorkflowItem[] = [
+  {
+    id: 1,
+    projectId: 3,
+    projectName: "Programme 3: Education",
+    department: "Gauteng Department of Education",
+    quarter: "Q2 2025/26",
+    status: "approved",
+    submittedBy: "Thabo Mthembu",
+    submittedDate: "2025-11-10",
+    reviewedBy: "Lindiwe Khumalo",
+    reviewedDate: "2025-11-12",
+    approvedBy: "Nomsa Dlamini",
+    approvedDate: "2025-11-13",
+  },
+  {
+    id: 2,
+    projectId: 2,
+    projectName: "Programme 2: Health",
+    department: "Gauteng Department of Health",
+    quarter: "Q2 2025/26",
+    status: "under_review",
+    submittedBy: "Sipho Nkosi",
+    submittedDate: "2025-11-11",
+    reviewedBy: "Lindiwe Khumalo",
+    reviewedDate: "2025-11-14",
+    comments: "Please provide additional evidence for primary healthcare facilities indicator.",
+    deviationExplanation: "Delays in facility commissioning due to infrastructure challenges.",
+  },
+  {
+    id: 3,
+    projectId: 5,
+    projectName: "Programme 5: Social Development",
+    department: "Gauteng Department of Social Development",
+    quarter: "Q2 2025/26",
+    status: "returned",
+    submittedBy: "Mandla Zulu",
+    submittedDate: "2025-11-08",
+    reviewedBy: "Lindiwe Khumalo",
+    reviewedDate: "2025-11-10",
+    comments: "Report requires correction on social worker deployment figures. Please verify and resubmit.",
+    deviationExplanation: "Recruitment challenges and budget constraints affecting deployment.",
+  },
+  {
+    id: 4,
+    projectId: 8,
+    projectName: "Programme 8: Human Settlements",
+    department: "Gauteng Department of Human Settlements",
+    quarter: "Q2 2025/26",
+    status: "submitted",
+    submittedBy: "Mandla Zulu",
+    submittedDate: "2025-11-14",
+  },
+  {
+    id: 5,
+    projectId: 1,
+    projectName: "Programme 1: Administration",
+    department: "Gauteng Provincial Treasury",
+    quarter: "Q2 2025/26",
+    status: "draft",
+    submittedBy: "Thabo Mthembu",
+    submittedDate: "2025-11-15",
+  },
+];
+
+// Evidence/File Upload
+export interface Evidence {
+  id: number;
+  projectId: number;
+  fileName: string;
+  fileType: string;
+  fileSize: number;
+  uploadedBy: string;
+  uploadedDate: string;
+  description?: string;
+}
+
+export const evidenceFiles: Evidence[] = [
+  {
+    id: 1,
+    projectId: 2,
+    fileName: "Q2_Health_Facilities_Report.pdf",
+    fileType: "application/pdf",
+    fileSize: 2456789,
+    uploadedBy: "Sipho Nkosi",
+    uploadedDate: "2025-11-11",
+    description: "Primary healthcare facilities operational status report",
+  },
+  {
+    id: 2,
+    projectId: 2,
+    fileName: "Facility_Photos.zip",
+    fileType: "application/zip",
+    fileSize: 12345678,
+    uploadedBy: "Sipho Nkosi",
+    uploadedDate: "2025-11-11",
+    description: "Photographic evidence of operational facilities",
+  },
+  {
+    id: 3,
+    projectId: 3,
+    fileName: "Education_Nutrition_Data.xlsx",
+    fileType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    fileSize: 456789,
+    uploadedBy: "Thabo Mthembu",
+    uploadedDate: "2025-11-10",
+    description: "Nutrition programme coverage data",
+  },
+  {
+    id: 4,
+    projectId: 5,
+    fileName: "Social_Workers_Deployment.xlsx",
+    fileType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    fileSize: 345678,
+    uploadedBy: "Mandla Zulu",
+    uploadedDate: "2025-11-08",
+    description: "Social worker deployment tracking spreadsheet",
+  },
+];
+
+// Audit Trail
+export interface AuditLog {
+  id: number;
+  projectId?: number;
+  projectName?: string;
+  action: string;
+  user: string;
+  userRole: WorkflowRole;
+  timestamp: string;
+  details?: string;
+  ipAddress?: string;
+}
+
+export const auditLogs: AuditLog[] = [
+  {
+    id: 1,
+    projectId: 3,
+    projectName: "Programme 3: Education",
+    action: "Report Submitted",
+    user: "Thabo Mthembu",
+    userRole: "programme_manager",
+    timestamp: "2025-11-10 14:32:15",
+    details: "Q2 2025/26 quarterly report submitted for review",
+    ipAddress: "192.168.1.45",
+  },
+  {
+    id: 2,
+    projectId: 3,
+    projectName: "Programme 3: Education",
+    action: "Report Reviewed",
+    user: "Lindiwe Khumalo",
+    userRole: "reviewer",
+    timestamp: "2025-11-12 09:15:42",
+    details: "Report reviewed and forwarded for approval",
+    ipAddress: "192.168.1.67",
+  },
+  {
+    id: 3,
+    projectId: 3,
+    projectName: "Programme 3: Education",
+    action: "Report Approved",
+    user: "Nomsa Dlamini",
+    userRole: "treasury_manager",
+    timestamp: "2025-11-13 11:20:33",
+    details: "Q2 2025/26 quarterly report approved",
+    ipAddress: "192.168.1.89",
+  },
+  {
+    id: 4,
+    projectId: 2,
+    projectName: "Programme 2: Health",
+    action: "Evidence Uploaded",
+    user: "Sipho Nkosi",
+    userRole: "programme_manager",
+    timestamp: "2025-11-11 16:45:12",
+    details: "Uploaded Q2_Health_Facilities_Report.pdf",
+    ipAddress: "192.168.1.52",
+  },
+  {
+    id: 5,
+    projectId: 2,
+    projectName: "Programme 2: Health",
+    action: "Report Submitted",
+    user: "Sipho Nkosi",
+    userRole: "programme_manager",
+    timestamp: "2025-11-11 16:50:28",
+    details: "Q2 2025/26 quarterly report submitted with deviation explanation",
+    ipAddress: "192.168.1.52",
+  },
+  {
+    id: 6,
+    projectId: 2,
+    projectName: "Programme 2: Health",
+    action: "Review Comment Added",
+    user: "Lindiwe Khumalo",
+    userRole: "reviewer",
+    timestamp: "2025-11-14 10:30:15",
+    details: "Requested additional evidence for primary healthcare facilities indicator",
+    ipAddress: "192.168.1.67",
+  },
+  {
+    id: 7,
+    projectId: 5,
+    projectName: "Programme 5: Social Development",
+    action: "Report Returned",
+    user: "Lindiwe Khumalo",
+    userRole: "reviewer",
+    timestamp: "2025-11-10 14:22:08",
+    details: "Report returned for correction on social worker deployment figures",
+    ipAddress: "192.168.1.67",
+  },
+  {
+    id: 8,
+    action: "User Login",
+    user: "Thabo Mthembu",
+    userRole: "programme_manager",
+    timestamp: "2025-11-15 08:15:22",
+    details: "User logged into the system",
+    ipAddress: "192.168.1.45",
+  },
+  {
+    id: 9,
+    projectId: 8,
+    projectName: "Programme 8: Human Settlements",
+    action: "Report Submitted",
+    user: "Mandla Zulu",
+    userRole: "programme_manager",
+    timestamp: "2025-11-14 13:45:33",
+    details: "Q2 2025/26 quarterly report submitted",
+    ipAddress: "192.168.1.78",
+  },
+  {
+    id: 10,
+    action: "Dashboard Accessed",
+    user: "Nomsa Dlamini",
+    userRole: "treasury_manager",
+    timestamp: "2025-11-15 09:00:00",
+    details: "Accessed monitoring dashboard",
+    ipAddress: "192.168.1.89",
+  },
+];
+

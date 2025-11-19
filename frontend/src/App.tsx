@@ -2,6 +2,10 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import Login from "@/components/Login";
 import Dashboard from "@/components/Dashboard";
+import ReviewWorkflow from "@/components/ReviewWorkflow";
+import EvidenceUpload from "@/components/EvidenceUpload";
+import AuditTrail from "@/components/AuditTrail";
+import ReportSubmission from "@/components/ReportSubmission";
 import Layout from "@/components/Layout";
 
 function App() {
@@ -20,10 +24,34 @@ function App() {
             }
           />
           <Route
-            path="/dashboard/*"
+            path="/dashboard/review"
             element={
               <Layout>
-                <Dashboard />
+                <ReviewWorkflow />
+              </Layout>
+            }
+          />
+          <Route
+            path="/dashboard/evidence"
+            element={
+              <Layout>
+                <EvidenceUpload />
+              </Layout>
+            }
+          />
+          <Route
+            path="/dashboard/audit"
+            element={
+              <Layout>
+                <AuditTrail />
+              </Layout>
+            }
+          />
+          <Route
+            path="/dashboard/reports"
+            element={
+              <Layout>
+                <ReportSubmission />
               </Layout>
             }
           />
