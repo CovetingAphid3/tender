@@ -35,7 +35,7 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="h-12 rounded-[4px] border-[#E5E7EB] text-[16px] placeholder:text-[#9CA3AF] focus:border-[#4B5563] dark:border-[#374151] dark:bg-[#1F2937] dark:text-[#F9FAFB]"
+              className="h-12  border-[#E5E7EB] text-[16px] placeholder:text-[#9CA3AF] focus:border-[#4B5563] dark:border-[#374151] dark:bg-[#1F2937] dark:text-[#F9FAFB]"
               required
             />
           </div>
@@ -55,7 +55,7 @@ export default function Login() {
           </div>
           <Button
             type="submit"
-            className="w-full bg-[#1F2937] text-white hover:bg-[#4B5563] h-12 rounded-[4px] text-[16px] font-medium"
+            className="w-full bg-[#1F2937] text-white hover:bg-[#4B5563] h-12 text-[16px] font-medium"
           >
             Login
           </Button>
