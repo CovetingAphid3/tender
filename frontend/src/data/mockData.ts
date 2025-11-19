@@ -164,3 +164,87 @@ export const budgetData: BudgetData[] = [
   { department: "Public Safety", budget: 10000000, expenditure: 9500000, variance: -500000 },
 ];
 
+// Alerts/Notifications
+export interface Alert {
+  id: number;
+  type: "warning" | "error" | "info";
+  title: string;
+  message: string;
+  projectName?: string;
+  timestamp: string;
+  priority: "high" | "medium" | "low";
+}
+
+export const alerts: Alert[] = [
+  {
+    id: 1,
+    type: "error",
+    title: "Project Delayed",
+    message: "Digital Services is 17.6% behind target",
+    projectName: "Digital Services",
+    timestamp: "2025-11-14 16:45",
+    priority: "high",
+  },
+  {
+    id: 2,
+    type: "info",
+    title: "Quarterly Report Due",
+    message: "Q4 2025 report submission deadline in 5 days",
+    timestamp: "2025-11-14 14:20",
+    priority: "medium",
+  },
+];
+
+// Recent Activity
+export interface Activity {
+  id: number;
+  type: "submission" | "approval" | "update" | "comment";
+  user: string;
+  action: string;
+  projectName?: string;
+  timestamp: string;
+}
+
+export const recentActivity: Activity[] = [
+  {
+    id: 1,
+    type: "submission",
+    user: "John Smith",
+    action: "submitted quarterly report",
+    projectName: "Healthcare Access",
+    timestamp: "2 hours ago",
+  },
+  {
+    id: 2,
+    type: "approval",
+    user: "Sarah Johnson",
+    action: "approved",
+    projectName: "Infrastructure Upgrade",
+    timestamp: "4 hours ago",
+  },
+  {
+    id: 3,
+    type: "update",
+    user: "Mike Williams",
+    action: "updated progress",
+    projectName: "Community Safety",
+    timestamp: "6 hours ago",
+  },
+  {
+    id: 4,
+    type: "comment",
+    user: "Lisa Brown",
+    action: "added comment",
+    projectName: "Education Outreach",
+    timestamp: "1 day ago",
+  },
+  {
+    id: 5,
+    type: "submission",
+    user: "David Lee",
+    action: "submitted quarterly report",
+    projectName: "Transportation Network",
+    timestamp: "1 day ago",
+  },
+];
+

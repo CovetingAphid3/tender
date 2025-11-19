@@ -36,20 +36,39 @@ export default function Sidebar() {
         {navigation.map((item) => {
           const isActive = location.pathname === item.href || 
             (item.href !== "/dashboard" && location.pathname.startsWith(item.href));
+          const isDashboard = item.href === "/dashboard";
+          
+          if (isDashboard) {
+            return (
+              <Link
+                key={item.name}
+                to={item.href}
+                className={cn(
+                  "flex items-center gap-3 rounded-[4px] px-3 py-2 text-[14px] font-medium transition-colors",
+                  isActive
+                    ? "bg-[#1F2937] text-white dark:bg-[#1F2937] dark:text-white"
+                    : "text-[#4B5563] hover:bg-[#E5E7EB] dark:text-[#D1D5DB] dark:hover:bg-[#374151]"
+                )}
+              >
+                <item.icon className="h-5 w-5" />
+                {item.name}
+              </Link>
+            );
+          }
+          
+          // Placeholder for future features
           return (
-            <Link
+            <div
               key={item.name}
-              to={item.href}
               className={cn(
-                "flex items-center gap-3 rounded-[4px] px-3 py-2 text-[14px] font-medium transition-colors",
-                isActive
-                  ? "bg-[#1F2937] text-white dark:bg-[#1F2937] dark:text-white"
-                  : "text-[#4B5563] hover:bg-[#E5E7EB] dark:text-[#D1D5DB] dark:hover:bg-[#374151]"
+                "flex items-center gap-3 rounded-[4px] px-3 py-2 text-[14px] font-medium cursor-not-allowed opacity-50",
+                "text-[#4B5563] dark:text-[#D1D5DB]"
               )}
+              title="Coming soon"
             >
               <item.icon className="h-5 w-5" />
               {item.name}
-            </Link>
+            </div>
           );
         })}
       </nav>
