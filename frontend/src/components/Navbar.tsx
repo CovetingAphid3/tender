@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import { Moon, Sun, User, LogOut, Bell, Settings } from "lucide-react";
+import { useState } from "react";
+import { Moon, Sun, User, LogOut, Bell, Settings, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -9,15 +9,31 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { useTheme } from "@/contexts/ThemeContext";
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
-  const navigate = useNavigate();
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLoginSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Mock validation - accept any email/password for POC
+    if (email && password) {
+      setIsLoginOpen(false);
+      // Reset form
+      setEmail("");
+      setPassword("");
+    }
+  };
 
   const handleLogout = () => {
-    navigate("/login");
+    setIsLoginOpen(true);
   };
 
   return (
@@ -28,6 +44,15 @@ export default function Navbar() {
         </h2>
       </div>
       <div className="flex items-center gap-4">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setIsLoginOpen(true)}
+          className="h-9 text-[14px] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB]"
+        >
+          <LogIn className="h-4 w-4 mr-2" />
+          Login
+        </Button>
         <Button
           variant="ghost"
           size="icon"
@@ -84,6 +109,52 @@ export default function Navbar() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+
+      <Dialog open={isLoginOpen} onOpenChange={setIsLoginOpen}>
+        <DialogContent className="bg-white border border-[#E5E7EB] rounded-[4px] dark:bg-[#111827] dark:border-[#374151] max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-[24px] font-bold text-[#1F2937] dark:text-[#F9FAFB]">
+              Login
+            </DialogTitle>
+          </DialogHeader>
+          <form onSubmit={handleLoginSubmit} className="space-y-6 mt-4">
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-[14px] font-medium text-[#4B5563] dark:text-[#D1D5DB]">
+                Email
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                className="h-12 rounded-[4px] border-[#E5E7EB] text-[16px] placeholder:text-[#9CA3AF] focus:border-[#4B5563] dark:border-[#374151] dark:bg-[#1F2937] dark:text-[#F9FAFB]"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="password" className="text-[14px] font-medium text-[#4B5563] dark:text-[#D1D5DB]">
+                Password
+              </Label>
+              <Input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                className="h-12 rounded-[4px] border-[#E5E7EB] text-[16px] placeholder:text-[#9CA3AF] focus:border-[#4B5563] dark:border-[#374151] dark:bg-[#1F2937] dark:text-[#F9FAFB]"
+                required
+              />
+            </div>
+            <Button
+              type="submit"
+              className="w-full bg-[#1F2937] text-white hover:bg-[#4B5563] h-12 rounded-[4px] text-[16px] font-medium"
+            >
+              Login
+            </Button>
+          </form>
+        </DialogContent>
+      </Dialog>
     </header>
   );
 }
