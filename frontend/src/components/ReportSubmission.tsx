@@ -101,6 +101,27 @@ export default function ReportSubmission() {
                     deviation explanations
                 </p>
             </div>
+                    <Card className="p-4 mb-6 border border-[#E5E7EB] dark:border-[#374151] bg-[#FEF3C7] dark:bg-[#78350F]/20 flex flex-col gap-2">
+                        <div className="flex items-center gap-2">
+                            <Badge
+                                variant="secondary"
+                                className="text-[#92400E] border-[#F59E0B]"
+                            >
+                                <strong>SOAR Compliant (POC)</strong>
+                            </Badge>
+                            <span className="text-[13px] text-[#92400E] dark:text-[#FDE68A]">
+                                This feature is a proof-of-concept. Full SOAR
+                                functionality is a work in progress.
+                            </span>
+                        </div>
+                        <p className="text-[12px] text-[#92400E] dark:text-[#FDE68A] mt-1">
+                            Fields and metrics are{" "}
+                            <strong>provisionally aligned</strong>
+                            with the associated SOAR template for the selected
+                            programme. Full integration is pending due to time
+                            constraints.
+                        </p>
+                    </Card>
 
             {/* Validation Errors */}
             {validationErrors.length > 0 && (
@@ -187,27 +208,6 @@ export default function ReportSubmission() {
                         </div>
                     </Card>
 
-                    <Card className="p-4 mb-6 border border-[#E5E7EB] dark:border-[#374151] bg-[#FEF3C7] dark:bg-[#78350F]/20 flex flex-col gap-2">
-                        <div className="flex items-center gap-2">
-                            <Badge
-                                variant="secondary"
-                                className="text-[#92400E] border-[#F59E0B]"
-                            >
-                                <strong>SOAR Compliant (POC)</strong>
-                            </Badge>
-                            <span className="text-[13px] text-[#92400E] dark:text-[#FDE68A]">
-                                This feature is a proof-of-concept. Full SOAR
-                                functionality is a work in progress.
-                            </span>
-                        </div>
-                        <p className="text-[12px] text-[#92400E] dark:text-[#FDE68A] mt-1">
-                            Fields and metrics are{" "}
-                            <strong>provisionally aligned</strong>
-                            with the associated SOAR template for the selected
-                            programme. Full integration is pending due to time
-                            constraints.
-                        </p>
-                    </Card>
 
                     {/* Performance Data */}
                     <Card className="p-6 border border-[#E5E7EB] dark:border-[#374151]">
